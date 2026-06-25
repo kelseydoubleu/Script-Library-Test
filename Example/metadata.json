@@ -33,7 +33,16 @@
     "pavilion_geometry.py"
   ],
   "preview": "preview.png",
-  "notes": "Control point heights drive a interpolated surface using numpy. Works best with even grid dimensions. Odd grid counts may produce asymmetric results at boundary edges. Column family must be loaded in the Revit model before running.",
+  "how_to_use": [
+    "Ensure the column family is loaded in the Revit model before running",
+    "Open parametric-pavilion.dyn in Dynamo",
+    "Set grid dimensions (X, Y count) and bay spacing in the input nodes",
+    "Paste your control point height values as a flat list",
+    "Select the column family type from the dropdown",
+    "Run the script — columns and roof surface will be placed automatically",
+    "Open the generated schedule in Revit to verify member counts and lengths"
+  ],
+  "notes": "Control point heights drive an interpolated surface using numpy. Works best with even grid dimensions. Odd grid counts may produce asymmetric results at boundary edges. Column family must be loaded in the Revit model before running.",
   "tested_on": "Revit 2024, Dynamo 2.17",
-  "project_tested": "Internal R&D prototype"
+  "project_tested": "123.5678.000"
 }

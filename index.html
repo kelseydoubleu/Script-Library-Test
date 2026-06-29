@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Script Library</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white:   #ffffff;
+    --off:     #f7f7f7;
+    --border:  #e8e8e8;
+    --border2: #d0d0d0;
+    --text:    #111111;
+    --text2:   #666666;
+    --text3:   #aaaaaa;
+    --mono:    'JetBrains Mono', monospace;
+    --sans:    'Inter', sans-serif;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── Header ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    color: var(--text);
+  }
+
+  .logo span { color: var(--text3); }
+
+  .count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+  }
+
+  /* ── Layout ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    min-height: calc(100vh - 48px);
+  }
+
+  /* ── Sidebar ── */
+  aside {
+    border-right: 1px solid var(--border);
+    padding: 24px 16px;
+    position: sticky;
+    top: 48px;
+    height: calc(100vh - 48px);
+    overflow-y: auto;
+  }
+
+  .sidebar-group { margin-bottom: 24px; }
+
+  .sidebar-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 6px;
+    padding-left: 8px;
+  }
+
+  .filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px 8px;
+    background: none;
+    border: none;
+    border-radius: 4px;
+    color: var(--text2);
+    font-family: var(--sans);
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+    transition: background .1s, color .1s;
+    margin-bottom: 1px;
+  }
+
+  .filter-btn:hover { background: var(--off); color: var(--text); }
+  .filter-btn.active { background: var(--off); color: var(--text); font-weight: 500; }
+
+  .filter-n {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+  }
+
+  /* ── Main ── */
+  main { padding: 24px 32px; }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  #search {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--white);
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    transition: border-color .1s;
+  }
+
+  #search::placeholder { color: var(--text3); }
+  #search:focus { border-color: var(--border2); }
+
+  .results-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    white-space: nowrap;
+  }
+
+  /* ── Table ── */
+  .table { width: 100%; border-collapse: collapse; }
+
+  .table thead tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 0 12px 10px 0;
+    text-align: left;
+  }
+
+  .table th:last-child { padding-right: 0; }
+
+  .table tbody tr {
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .1s;
+  }
+
+  .table tbody tr:hover { background: var(--off); }
+
+  .table td {
+    padding: 12px 12px 12px 0;
+    vertical-align: top;
+  }
+
+  .table td:last-child { padding-right: 0; }
+
+  .td-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .td-desc {
+    font-size: 12px;
+    color: var(--text2);
+    max-width: 380px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .td-tool {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text2);
+    white-space: nowrap;
+  }
+
+  .td-status { white-space: nowrap; }
+
+  .status-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+
+  .dot-stable { background: #111; }
+  .dot-experimental { background: var(--text3); }
+
+  .status-text {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text2);
+  }
+
+  .td-version {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    white-space: nowrap;
+  }
+
+  /* ── Empty / loading ── */
+  .state-msg {
+    padding: 48px 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  /* ── Modal overlay ── */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.3);
+    z-index: 200;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 24px;
+    overflow-y: auto;
+  }
+
+  .overlay.open { display: flex; }
+
+  /* ── Modal ── */
+  .modal {
+    background: var(--white);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    width: 100%;
+    max-width: 600px;
+    padding: 32px;
+    position: relative;
+    animation: up .15s ease;
+  }
+
+  @keyframes up {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text3);
+    font-size: 14px;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+
+  .modal-close:hover { border-color: var(--border2); color: var(--text); }
+
+  .modal-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .eyebrow-tool {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+  }
+
+  .modal-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    padding-right: 32px;
+  }
+
+  .modal-desc {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 8px;
+  }
+
+  .plain-list {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .plain-list li {
+    font-size: 13px;
+    color: var(--text2);
+    padding: 3px 0 3px 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .plain-list li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--text3);
+    font-family: var(--mono);
+  }
+
+  .steps-list {
+    list-style: none;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .steps-list li {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+
+  .step-n {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    min-width: 16px;
+    padding-top: 2px;
+  }
+
+  .notes-box {
+    background: var(--off);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text2);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .meta-cell-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 3px;
+  }
+
+  .meta-cell-value {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text2);
+  }
+
+  .downloads {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 20px;
+  }
+
+  .dl-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+    text-decoration: none;
+    transition: border-color .1s, background .1s;
+  }
+
+  .dl-btn:hover { border-color: var(--border2); background: var(--off); }
+
+  .dl-arrow { color: var(--text3); }
+  .dl-ext { margin-left: auto; color: var(--text3); font-size: 10px; }
+
+  .tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="logo">script<span>/</span>library</span>
+  <span class="count" id="totalCount"></span>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Tool</div>
+      <button class="filter-btn active" data-filter="tool" data-value="all">All <span class="filter-n" id="n-all"></span></button>
+      <button class="filter-btn" data-filter="tool" data-value="dynamo">Dynamo <span class="filter-n" id="n-dynamo"></span></button>
+      <button class="filter-btn" data-filter="tool" data-value="grasshopper">Grasshopper <span class="filter-n" id="n-grasshopper"></span></button>
+      <button class="filter-btn" data-filter="tool" data-value="python">Python <span class="filter-n" id="n-python"></span></button>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Status</div>
+      <button class="filter-btn" data-filter="status" data-value="all">All <span class="filter-n" id="n-status-all"></span></button>
+      <button class="filter-btn" data-filter="status" data-value="stable">Stable <span class="filter-n" id="n-stable"></span></button>
+      <button class="filter-btn" data-filter="status" data-value="experimental">Experimental <span class="filter-n" id="n-experimental"></span></button>
+    </div>
+    <div class="sidebar-group" id="cat-group">
+      <div class="sidebar-label">Category</div>
+      <div id="cat-filters"></div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="top-bar">
+      <input type="text" id="search" placeholder="Search scripts, tags, keywords…" autocomplete="off"/>
+      <span class="results-label" id="resultsLabel"></span>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Tool</th>
+          <th>Status</th>
+          <th>Version</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div id="stateMsg" class="state-msg">loading…</div>
+  </main>
+</div>
+
+<!-- Modal -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────
+const REPO_BASE = 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main';
+const REGISTRY  = `${REPO_BASE}/directory.json`;
+// ────────────────────────────────────────────────────
+
+let all = [];
+let filters = { tool: 'all', status: 'all', category: 'all' };
+let q = '';
+
+async function init() {
+  try {
+    const dir = await fetch(REGISTRY).then(r => r.json());
+    const results = await Promise.all(
+      dir.scripts.map(async path => {
+        try {
+          const m = await fetch(`${REPO_BASE}/${path}/metadata.json`).then(r => r.json());
+          return { ...m, _path: path };
+        } catch { return null; }
+      })
+    );
+    all = results.filter(Boolean);
+    buildCats();
+    updateCounts();
+    render();
+    document.getElementById('totalCount').textContent = `${all.length} script${all.length !== 1 ? 's' : ''}`;
+  } catch {
+    document.getElementById('stateMsg').textContent = 'could not load directory.json — check REPO_BASE in index.html';
+  }
+}
+
+function buildCats() {
+  const cats = [...new Set(all.map(s => s.category).filter(Boolean))].sort();
+  const el = document.getElementById('cat-filters');
+  el.innerHTML = `<button class="filter-btn active" data-filter="category" data-value="all">All</button>`
+    + cats.map(c => `<button class="filter-btn" data-filter="category" data-value="${c}">${c.replace(/-/g,' ')}</button>`).join('');
+  el.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', onFilter));
+}
+
+function updateCounts() {
+  const set = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
+  set('n-all', all.length);
+  set('n-dynamo',      all.filter(s => s.tool === 'dynamo').length);
+  set('n-grasshopper', all.filter(s => s.tool === 'grasshopper').length);
+  set('n-python',      all.filter(s => s.tool === 'python').length);
+  set('n-status-all',  all.length);
+  set('n-stable',      all.filter(s => s.status === 'stable').length);
+  set('n-experimental',all.filter(s => s.status === 'experimental').length);
+}
+
+function getFiltered() {
+  return all.filter(s => {
+    if (filters.tool !== 'all'     && s.tool !== filters.tool) return false;
+    if (filters.status !== 'all'   && s.status !== filters.status) return false;
+    if (filters.category !== 'all' && s.category !== filters.category) return false;
+    if (!q) return true;
+    const hay = [s.name, s.description, s.category, ...(s.tags||[]), ...(s.keywords||[]), s.tool].join(' ').toLowerCase();
+    return hay.includes(q.toLowerCase());
+  });
+}
+
+function render() {
+  const scripts = getFiltered();
+  const tbody = document.getElementById('tbody');
+  const msg   = document.getElementById('stateMsg');
+  document.getElementById('resultsLabel').textContent = `${scripts.length} result${scripts.length !== 1 ? 's' : ''}`;
+
+  if (!scripts.length) {
+    tbody.innerHTML = '';
+    msg.textContent = q || filters.tool !== 'all' || filters.status !== 'all' || filters.category !== 'all'
+      ? 'no scripts match — try clearing the filters'
+      : 'no scripts found';
+    msg.style.display = 'block';
+    return;
+  }
+
+  msg.style.display = 'none';
+  tbody.innerHTML = scripts.map(s => `
+    <tr data-path="${s._path}">
+      <td class="td-name">${s.name}</td>
+      <td class="td-desc">${s.description}</td>
+      <td class="td-tool">${s.tool}</td>
+      <td class="td-status">
+        <span class="status-dot dot-${s.status}"></span>
+        <span class="status-text">${s.status}</span>
+      </td>
+      <td class="td-version">v${s.version}</td>
+    </tr>
+  `).join('');
+
+  tbody.querySelectorAll('tr').forEach(row => {
+    row.addEventListener('click', () => {
+      const s = all.find(x => x._path === row.dataset.path);
+      if (s) openModal(s);
+    });
+  });
+}
+
+function openModal(s) {
+  const filesHtml = (s.companion_files || []).map(f => `
+    <a class="dl-btn" href="${REPO_BASE}/${s._path}/${f}" download target="_blank">
+      <span class="dl-arrow">↓</span>${f}
+      <span class="dl-ext">${f.split('.').pop().toUpperCase()}</span>
+    </a>`).join('');
+
+  const li = arr => arr && arr.length ? `<ul class="plain-list">${arr.map(i=>`<li>${i}</li>`).join('')}</ul>` : '';
+
+  const steps = s.how_to_use ? `
+    <div class="section-label">How to use</div>
+    <ol class="steps-list">
+      ${s.how_to_use.map((step,i)=>`<li><span class="step-n">${i+1}.</span><span>${step}</span></li>`).join('')}
+    </ol>` : '';
+
+  const notes = s.notes ? `
+    <div class="section-label">Notes</div>
+    <div class="notes-box">${s.notes}</div>` : '';
+
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-eyebrow">
+      <span class="eyebrow-tool">${s.tool}</span>
+      <span class="eyebrow-status"><span class="status-dot dot-${s.status}"></span>${s.status}</span>
+    </div>
+    <div class="modal-name">${s.name}</div>
+    <div class="modal-desc">${s.description}</div>
+
+    <div class="meta-row">
+      <div><div class="meta-cell-label">Version</div><div class="meta-cell-value">v${s.version}</div></div>
+      <div><div class="meta-cell-label">Updated</div><div class="meta-cell-value">${s.date_updated}</div></div>
+      <div><div class="meta-cell-label">Author</div><div class="meta-cell-value">${s.author}</div></div>
+      <div><div class="meta-cell-label">Tested on</div><div class="meta-cell-value">${s.tested_on || '—'}</div></div>
+    </div>
+
+    <hr/>
+    ${s.inputs?.length  ? `<div class="section-label">Inputs</div>${li(s.inputs)}`  : ''}
+    ${s.outputs?.length ? `<div class="section-label">Outputs</div>${li(s.outputs)}` : ''}
+    ${s.dependencies?.length ? `<div class="section-label">Dependencies</div>${li(s.dependencies)}` : ''}
+    <hr/>
+    ${steps}
+    ${notes}
+    ${filesHtml ? `<div class="section-label">Download files</div><div class="downloads">${filesHtml}</div>` : ''}
+    <div class="tags-row">${(s.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+  `;
+
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function onFilter(e) {
+  const btn = e.currentTarget;
+  const { filter, value } = btn.dataset;
+  filters[filter] = value;
+  document.querySelectorAll(`[data-filter="${filter}"]`).forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+document.querySelectorAll('[data-filter]').forEach(b => b.addEventListener('click', onFilter));
+document.getElementById('search').addEventListener('input', e => { q = e.target.value.trim(); render(); });
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('overlay').addEventListener('click', e => { if (e.target.id === 'overlay') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+init();
+</script>
+</body>
+</html>

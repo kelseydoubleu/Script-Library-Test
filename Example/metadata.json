@@ -32,7 +32,7 @@
     "parametric-pavilion.dyn",
     "pavilion_geometry.py"
   ],
-  "preview": "preview.png",
+  "preview": "preview.jpg",
   "how_to_use": [
     "Ensure the column family is loaded in the Revit model before running",
     "Open parametric-pavilion.dyn in Dynamo",

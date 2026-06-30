@@ -7,7 +7,7 @@
   "category": "Data Maintenance",
   "tags": ["key-schedule", "excel", "gfloorz", "standardization", "automation", "parameter-management"],
   "keywords": ["key schedule remap", "excel to revit", "data synchronization", "parameter overwrite", "standards enforcement", "bulk update"],
-  "author": "your name",
+  "author": "Travis Bahl",
   "date_updated": "2026-06-30",
   "inputs": [
     "Excel file with correct key schedule values",

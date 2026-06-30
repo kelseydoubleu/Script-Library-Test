@@ -44,4 +44,6 @@
   "notes": "Tile layout starts from the grid offset point and works outward, so cut tiles are pushed to room edges rather than the center. Irregular room boundaries (non-rectangular) may produce a higher percentage of cut tiles — review the preview before finalizing. Does not currently account for light fixture cutouts.",
   "tested_on": "Revit 2024, Dynamo 2.17",
   "project_tested": "000.0000.001"
+  "approved_by": "Kelsey Wang",
+  "date_approved": "2026-06-25"
 }

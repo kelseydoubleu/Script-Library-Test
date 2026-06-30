@@ -1,5 +1,5 @@
 {
-  "name": "Key Schedule Remapping from Excel",
+  "name": "gFloorz - Key Schedule Remapping",
   "description": "Updates and remaps Revit key schedule values using an Excel source of truth. Reads a structured Excel file containing the desired key schedule data and applies the correct values to elements in the model, ensuring consistency with external standards.",
   "tool": "dynamo",
   "version": "1.0.0",

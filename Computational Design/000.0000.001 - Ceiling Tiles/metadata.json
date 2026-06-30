@@ -1,0 +1,47 @@
+{
+  "name": "Ceiling Tiles",
+  "description": "Generates a layout of ceiling tiles across an interior workplace floor plate, accounting for room boundaries and MEP clash zones. Outputs tile geometry and a basic quantity schedule.",
+  "tool": "dynamo",
+  "version": "1.0.0",
+  "status": "experimental",
+  "category": "Modeling / Geometry",
+  "tags": ["parametric", "interior", "ceiling", "tiles", "revit"],
+  "keywords": ["ceiling grid", "tile layout", "acoustic tile", "reflected ceiling plan", "RCP", "room boundary", "tile pattern"],
+  "author": "your name",
+  "date_updated": "2026-06-25",
+  "inputs": [
+    "Room boundary (closed curve from Revit room)",
+    "Tile dimensions (W x H in mm)",
+    "Grid offset / starting point",
+    "Ceiling tile family type (Revit family)",
+    "MEP clash geometry (optional, for avoidance)"
+  ],
+  "outputs": [
+    "Placed ceiling tile family instances in Revit",
+    "Tile layout grid as reference lines",
+    "Quantity schedule (tile count, cut tile count, total area)"
+  ],
+  "dependencies": [
+    "Dynamo 2.17+",
+    "Python 3.x (embedded node)",
+    "DynamoIronPython2.0",
+    "Revit 2024"
+  ],
+  "companion_files": [
+    "ceiling-tiles.dyn",
+    "tile_grid_layout.py"
+  ],
+  "preview": "preview.jpg",
+  "how_to_use": [
+    "Ensure the ceiling tile family is loaded in the Revit model before running",
+    "Open ceiling-tiles.dyn in Dynamo",
+    "Select the room or floor boundary to populate",
+    "Set tile width and height in the input nodes",
+    "Set the grid starting point / offset to control where cut tiles fall",
+    "Run the script — tiles will be placed automatically within the boundary",
+    "Review the generated schedule to check total tile count and cut tile percentage"
+  ],
+  "notes": "Tile layout starts from the grid offset point and works outward, so cut tiles are pushed to room edges rather than the center. Irregular room boundaries (non-rectangular) may produce a higher percentage of cut tiles — review the preview before finalizing. Does not currently account for light fixture cutouts.",
+  "tested_on": "Revit 2024, Dynamo 2.17",
+  "project_tested": "000.0000.001"
+}

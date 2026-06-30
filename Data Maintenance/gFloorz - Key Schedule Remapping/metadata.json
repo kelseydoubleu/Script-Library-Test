@@ -1,0 +1,45 @@
+{
+  "name": "Key Schedule Remapping from Excel",
+  "description": "Updates and remaps Revit key schedule values using an Excel source of truth. Reads a structured Excel file containing the desired key schedule data and applies the correct values to elements in the model, ensuring consistency with external standards.",
+  "tool": "dynamo",
+  "version": "1.0.0",
+  "status": "stable",
+  "category": "data",
+  "tags": ["key-schedule", "excel", "gfloorz", "standardization", "automation", "parameter-management"],
+  "keywords": ["key schedule remap", "excel to revit", "data synchronization", "parameter overwrite", "standards enforcement", "bulk update"],
+  "author": "your name",
+  "date_updated": "2026-06-30",
+  "inputs": [
+    "Excel file with correct key schedule values",
+    "Revit key schedule",
+    "Target elements associated with key schedule",
+    "Parameter mapping between Excel columns and Revit fields"
+  ],
+  "outputs": [
+    "Updated key schedule values in Revit",
+    "Elements reassigned or updated based on Excel data",
+    "Standardized parameter values aligned with source data"
+  ],
+  "dependencies": [
+    "Dynamo 2.17+",
+    "Revit 2024",
+    "Excel (linked or imported)"
+  ],
+  "companion_files": [
+    "key-schedule-remap.dyn",
+    "key-schedule-template.xlsx"
+  ],
+  "preview": "preview.jpg",
+  "how_to_use": [
+    "Prepare the Excel file with the correct key schedule values and matching identifiers",
+    "Open the Revit model containing the key schedule",
+    "Open the Dynamo script",
+    "Select or input the Excel file path",
+    "Map Excel columns to corresponding key schedule parameters",
+    "Run the script",
+    "Verify that key schedule values and associated elements are updated correctly"
+  ],
+  "notes": "This script assumes a consistent mapping structure between Excel and Revit key schedule fields. Unique identifiers (such as key names or IDs) must match between the model and Excel. Incorrect mappings may overwrite data unintentionally—use with caution and test on a sample model first.",
+  "tested_on": "Revit 2024, Dynamo 2.17",
+  "project_tested": "TBD"
+}

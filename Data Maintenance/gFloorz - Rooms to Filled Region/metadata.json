@@ -1,48 +1,42 @@
 {
-  "name": "Parametric Pavilion Generator",
-  "description": "Generates a parametric pavilion structure driven by a grid of user-defined control points. Outputs structural member layout, roof surface geometry, and a basic material schedule directly into Revit.",
+  "name": "Rooms to Filled Regions (gFloorz)",
+  "description": "Extracts Revit room data into 2D filled regions for benchmarking and test fit workflows. Converts room boundaries into filled regions and transfers room names into the 'Comments' parameter to support gFloorz analysis and visualization.",
   "tool": "dynamo",
   "version": "1.0.0",
-  "status": "experimental",
-  "category": "computational-design",
-  "tags": ["parametric", "pavilion", "structure", "geometry", "revit"],
-  "keywords": ["pavilion", "canopy", "grid", "control points", "adaptive", "structural layout", "roof surface"],
+  "status": "stable",
+  "category": "data",
+  "tags": ["rooms", "filled-regions", "benchmarking", "gfloorz", "test-fit", "space-analysis"],
+  "keywords": ["space benchmarking", "room data extraction", "gfloorz workflow", "test fit diagrams", "space planning analysis", "2d abstraction"],
   "author": "your name",
-  "date_updated": "2026-06-25",
+  "date_updated": "2026-06-30",
   "inputs": [
-    "Grid dimensions (X, Y count)",
-    "Bay spacing (meters)",
-    "Control point heights (list of floats)",
-    "Column family type (Revit family)",
-    "Roof surface material"
+    "Room elements (Revit rooms)",
+    "Target plan view",
+    "Filled region type",
+    "Room name parameter"
   ],
   "outputs": [
-    "Placed structural columns in Revit",
-    "Roof surface as adaptive component",
-    "Material schedule (member count, lengths)"
+    "Filled regions representing room footprints",
+    "Filled region 'Comments' populated with room names for downstream analysis"
   ],
   "dependencies": [
     "Dynamo 2.17+",
-    "Python 3.x (embedded node)",
-    "DynamoIronPython2.0",
-    "numpy",
     "Revit 2024"
   ],
   "companion_files": [
-    "parametric-pavilion.dyn",
-    "pavilion_geometry.py"
+    "rooms-to-filled-regions.dyn"
   ],
   "preview": "preview.jpg",
   "how_to_use": [
-    "Ensure the column family is loaded in the Revit model before running",
-    "Open parametric-pavilion.dyn in Dynamo",
-    "Set grid dimensions (X, Y count) and bay spacing in the input nodes",
-    "Paste your control point height values as a flat list",
-    "Select the column family type from the dropdown",
-    "Run the script — columns and roof surface will be placed automatically",
-    "Open the generated schedule in Revit to verify member counts and lengths"
+    "Open a Revit model with properly placed and bounded rooms",
+    "Open the Dynamo script",
+    "Select the target plan view for region creation",
+    "Choose the filled region type",
+    "Run the script",
+    "Verify that filled regions are created and review the Comments parameter for correct room name transfer",
+    "Use the output for gFloorz benchmarking or visualization workflows"
   ],
-  "notes": "Control point heights drive an interpolated surface using numpy. Works best with even grid dimensions. Odd grid counts may produce asymmetric results at boundary edges. Column family must be loaded in the Revit model before running.",
+  "notes": "This script converts BIM spatial data into lightweight 2D representations for analysis workflows. Intended for benchmarking and gFloorz use cases, not for documentation. Accuracy depends on valid room boundaries.",
   "tested_on": "Revit 2024, Dynamo 2.17",
-  "project_tested": "123.5678.000"
+  "project_tested": "gFloorz"
 }

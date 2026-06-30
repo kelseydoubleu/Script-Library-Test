@@ -42,4 +42,6 @@
   "notes": "This script assumes a consistent mapping structure between Excel and Revit key schedule fields. Unique identifiers (such as key names or IDs) must match between the model and Excel. Incorrect mappings may overwrite data unintentionally—use with caution and test on a sample model first.",
   "tested_on": "Revit 2024, Dynamo 2.17",
   "project_tested": "TBD"
+  "approved_by": "Kelsey Wang",
+  "date_approved": "2026-06-25"
 }

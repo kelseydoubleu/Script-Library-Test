@@ -558,7 +558,7 @@ async function init() {
     const results = await Promise.all(
       dir.scripts.map(async path => {
         try {
-          const m = await fetch(`${REPO_BASE}/${path}/metadata.json`).then(r => r.json());
+          const m = await fetch(`${REPO_BASE}/${encodeURIComponent(path).replace(/%2F/g, '/')}/metadata.json`).then(r => r.json());
           return { ...m, _path: path };
         } catch { return null; }
       })

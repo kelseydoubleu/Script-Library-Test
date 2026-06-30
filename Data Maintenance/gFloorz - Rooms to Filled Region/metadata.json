@@ -1,0 +1,48 @@
+{
+  "name": "Parametric Pavilion Generator",
+  "description": "Generates a parametric pavilion structure driven by a grid of user-defined control points. Outputs structural member layout, roof surface geometry, and a basic material schedule directly into Revit.",
+  "tool": "dynamo",
+  "version": "1.0.0",
+  "status": "experimental",
+  "category": "computational-design",
+  "tags": ["parametric", "pavilion", "structure", "geometry", "revit"],
+  "keywords": ["pavilion", "canopy", "grid", "control points", "adaptive", "structural layout", "roof surface"],
+  "author": "your name",
+  "date_updated": "2026-06-25",
+  "inputs": [
+    "Grid dimensions (X, Y count)",
+    "Bay spacing (meters)",
+    "Control point heights (list of floats)",
+    "Column family type (Revit family)",
+    "Roof surface material"
+  ],
+  "outputs": [
+    "Placed structural columns in Revit",
+    "Roof surface as adaptive component",
+    "Material schedule (member count, lengths)"
+  ],
+  "dependencies": [
+    "Dynamo 2.17+",
+    "Python 3.x (embedded node)",
+    "DynamoIronPython2.0",
+    "numpy",
+    "Revit 2024"
+  ],
+  "companion_files": [
+    "parametric-pavilion.dyn",
+    "pavilion_geometry.py"
+  ],
+  "preview": "preview.jpg",
+  "how_to_use": [
+    "Ensure the column family is loaded in the Revit model before running",
+    "Open parametric-pavilion.dyn in Dynamo",
+    "Set grid dimensions (X, Y count) and bay spacing in the input nodes",
+    "Paste your control point height values as a flat list",
+    "Select the column family type from the dropdown",
+    "Run the script — columns and roof surface will be placed automatically",
+    "Open the generated schedule in Revit to verify member counts and lengths"
+  ],
+  "notes": "Control point heights drive an interpolated surface using numpy. Works best with even grid dimensions. Odd grid counts may produce asymmetric results at boundary edges. Column family must be loaded in the Revit model before running.",
+  "tested_on": "Revit 2024, Dynamo 2.17",
+  "project_tested": "123.5678.000"
+}

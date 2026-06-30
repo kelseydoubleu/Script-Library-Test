@@ -4,7 +4,7 @@
   "tool": "dynamo",
   "version": "1.0.0",
   "status": "stable",
-  "category": "data",
+  "category": "Data Extraction",
   "tags": ["rooms", "filled-regions", "benchmarking", "gfloorz", "test-fit", "space-analysis"],
   "keywords": ["space benchmarking", "room data extraction", "gfloorz workflow", "test fit diagrams", "space planning analysis", "2d abstraction"],
   "author": "your name",

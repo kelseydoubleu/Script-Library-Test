@@ -4,7 +4,7 @@
   "tool": "dynamo",
   "version": "1.0.0",
   "status": "stable",
-  "category": "data",
+  "category": "Data Maintenance",
   "tags": ["key-schedule", "excel", "gfloorz", "standardization", "automation", "parameter-management"],
   "keywords": ["key schedule remap", "excel to revit", "data synchronization", "parameter overwrite", "standards enforcement", "bulk update"],
   "author": "your name",

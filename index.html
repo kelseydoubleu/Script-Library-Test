@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Script Library</title>
+<title>DT Script Library</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap');
 
@@ -44,14 +44,24 @@
   }
 
   .logo {
-    font-family: var(--mono);
-    font-size: 12px;
+    font-family: var(--sans);
+    font-size: 13px;
     font-weight: 500;
-    letter-spacing: .06em;
     color: var(--text);
   }
 
-  .logo span { color: var(--text3); }
+  .header-btn {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--text2);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 10px;
+    transition: border-color .1s, color .1s;
+  }
+
+  .header-btn:hover { border-color: var(--border2); color: var(--text); }
 
   .count {
     font-family: var(--mono);
@@ -400,7 +410,7 @@
 
   .meta-row {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin-bottom: 20px;
   }
@@ -460,13 +470,26 @@
     padding: 2px 7px;
     border-radius: 3px;
   }
+
+  .report-btn {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--text3);
+    text-decoration: none;
+    transition: color .1s;
+  }
+
+  .report-btn:hover { color: var(--text); }
 </style>
 </head>
 <body>
 
 <header>
-  <span class="logo">script<span>/</span>library</span>
-  <span class="count" id="totalCount"></span>
+  <span class="logo">DT Script Library</span>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <span class="count" id="totalCount"></span>
+    <a href="#" class="header-btn">+ Request a script</a>
+  </div>
 </header>
 
 <div class="layout">
@@ -521,7 +544,7 @@
 
 <script>
 // ── CONFIG ──────────────────────────────────────────
-const REPO_BASE = 'https://raw.githubusercontent.com/kelseydoubleu/Script-Library-Test/main';
+const REPO_BASE = 'https://raw.githubusercontent.com/YOUR_USERNAME/Script-Library-Test/main';
 const REGISTRY  = `${REPO_BASE}/directory.json`;
 // ────────────────────────────────────────────────────
 
@@ -646,9 +669,11 @@ function openModal(s) {
 
     <div class="meta-row">
       <div><div class="meta-cell-label">Version</div><div class="meta-cell-value">v${s.version}</div></div>
-      <div><div class="meta-cell-label">Updated</div><div class="meta-cell-value">${s.date_updated}</div></div>
+      <div><div class="meta-cell-label">Last updated</div><div class="meta-cell-value">${s.date_updated}</div></div>
       <div><div class="meta-cell-label">Author</div><div class="meta-cell-value">${s.author}</div></div>
       <div><div class="meta-cell-label">Tested on</div><div class="meta-cell-value">${s.tested_on || '—'}</div></div>
+      <div><div class="meta-cell-label">Approved by</div><div class="meta-cell-value">${s.approved_by || '—'}</div></div>
+      <div><div class="meta-cell-label">Date approved</div><div class="meta-cell-value">${s.date_approved || '—'}</div></div>
     </div>
 
     <hr/>
@@ -660,6 +685,9 @@ function openModal(s) {
     ${notes}
     ${filesHtml ? `<div class="section-label">Download files</div><div class="downloads">${filesHtml}</div>` : ''}
     <div class="tags-row">${(s.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+      <a href="#" class="report-btn">↗ Report an issue with this script</a>
+    </div>
   `;
 
   document.getElementById('overlay').classList.add('open');

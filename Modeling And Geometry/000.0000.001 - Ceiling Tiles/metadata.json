@@ -7,7 +7,7 @@
   "category": "Modeling / Geometry",
   "tags": ["parametric", "interior", "ceiling", "tiles", "revit"],
   "keywords": ["ceiling grid", "tile layout", "acoustic tile", "reflected ceiling plan", "RCP", "room boundary", "tile pattern"],
-  "author": "your name",
+  "author": "Travis Halverson",
   "date_updated": "2026-06-25",
   "inputs": [
     "Room boundary (closed curve from Revit room)",

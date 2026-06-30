@@ -1,5 +1,5 @@
 {
-  "name": "Rooms to Filled Regions (gFloorz)",
+  "name": "gFloorz - Rooms to Filled Region",
   "description": "Extracts Revit room data into 2D filled regions for benchmarking and test fit workflows. Converts room boundaries into filled regions and transfers room names into the 'Comments' parameter to support gFloorz analysis and visualization.",
   "tool": "dynamo",
   "version": "1.0.0",

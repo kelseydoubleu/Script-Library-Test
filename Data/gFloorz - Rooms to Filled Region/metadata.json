@@ -38,7 +38,7 @@
   ],
   "notes": "This script converts BIM spatial data into lightweight 2D representations for analysis workflows. Intended for benchmarking and gFloorz use cases, not for documentation. Accuracy depends on valid room boundaries.",
   "tested_on": "Revit 2024, Dynamo 2.17",
-  "project_tested": "gFloorz"
+  "project_tested": "gFloorz",
   "approved_by": "Zach Trattner",
   "date_approved": "2026-06-25"
 }

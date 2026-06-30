@@ -1,5 +1,5 @@
 {
-  "name": "Parametric Pavilion Generator",
+  "name": "000.0000.002 - Parametric Pavilion",
   "description": "Generates a parametric pavilion structure driven by a grid of user-defined control points. Outputs structural member layout, roof surface geometry, and a basic material schedule directly into Revit.",
   "tool": "dynamo",
   "version": "1.0.0",

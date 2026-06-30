@@ -45,4 +45,6 @@
   "notes": "Control point heights drive an interpolated surface using numpy. Works best with even grid dimensions. Odd grid counts may produce asymmetric results at boundary edges. Column family must be loaded in the Revit model before running.",
   "tested_on": "Revit 2024, Dynamo 2.17",
   "project_tested": "000.0000.002"
+  "approved_by": "Zach Trattner",
+  "date_approved": "2026-06-25"
 }

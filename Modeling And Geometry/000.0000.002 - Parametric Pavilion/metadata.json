@@ -7,7 +7,7 @@
   "category": "Modeling / Geometry",
   "tags": ["parametric", "pavilion", "structure", "geometry", "revit"],
   "keywords": ["pavilion", "canopy", "grid", "control points", "adaptive", "structural layout", "roof surface"],
-  "author": "your name",
+  "author": "Zach Trattner",
   "date_updated": "2026-06-25",
   "inputs": [
     "Grid dimensions (X, Y count)",

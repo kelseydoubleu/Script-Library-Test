@@ -1,8 +1,8 @@
 {
   "scripts": [
-    "000.0000.001 - Ceiling Tiles",
-    "000.0000.002 - Parametric Pavilion",
-    "gFloorz - Key Schedule Remapping",
-    "gFloorz - Rooms to Filled Region"
+    "Computational Design/000.0000.001 - Ceiling Tiles",
+    "Computational Design/000.0000.002 - Parametric Pavilion",
+    "Data Maintenance/gFloorz - Key Schedule Remapping",
+    "Data Maintenance/gFloorz - Rooms to Filled Region"
   ]
 }

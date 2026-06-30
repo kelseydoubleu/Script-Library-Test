@@ -1,5 +1,5 @@
 {
-  "name": "Ceiling Tiles",
+  "name": "000.0000.001 - Ceiling Tiles",
   "description": "Generates a layout of ceiling tiles across an interior workplace floor plate, accounting for room boundaries and MEP clash zones. Outputs tile geometry and a basic quantity schedule.",
   "tool": "dynamo",
   "version": "1.0.0",
